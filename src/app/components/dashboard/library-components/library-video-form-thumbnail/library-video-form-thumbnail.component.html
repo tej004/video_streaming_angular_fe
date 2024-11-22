@@ -1,0 +1,25 @@
+<div>
+  <div>Thumbnail</div>
+  <div
+    class="relative cursor-pointer h-full w-full"
+    (click)="fileInput.click()"
+  >
+    <img
+      [src]="thumbnailUrl"
+      alt="Video Thumbnail"
+      class="w-full object-cover rounded-md"
+    />
+    <div
+      class="absolute flex inset-0 h-auto max-h-38 items-center rounded-md justify-center bg-gray-900 bg-opacity-80 text-white opacity-0 hover:opacity-100 transition-opacity"
+    >
+      <div>Change Thumbnail</div>
+    </div>
+    <input
+      type="file"
+      (change)="onThumbnailChanged($event)"
+      accept="image/*"
+      class="hidden"
+      #fileInput
+    />
+  </div>
+</div>

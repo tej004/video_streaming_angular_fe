@@ -1,0 +1,47 @@
+<div class="flex flex-wrap max-h-screen">
+  <app-library-video-form
+    [isModalOpen]="isFormOpen"
+    (handleToggleModal)="toggleForm()"
+  ></app-library-video-form>
+  <!-- Left Side: Form to Edit -->
+  <div class="w-full md:w-1/2 rounded-md p-4 h-full">
+    <app-library-update-form
+      [selectedVideo]="selectedVideoDetails"
+    ></app-library-update-form>
+  </div>
+
+  <!-- Right Side: List of Videos -->
+  <div class="w-full md:w-1/2 px-2 pt-2">
+    <div class="w-full flex flex-row justify-between pl-2">
+      <div class="w-4/6">
+        <input
+          type="text"
+          placeholder="Search"
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="filterVideos()"
+          class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-violet-500 py-2"
+        />
+      </div>
+      <button
+        (click)="toggleForm()"
+        class="bg-violet-500 hover:bg-violet-800 text-white font-bold py-2 px-4 rounded-md mb-3"
+      >
+        Create +
+      </button>
+    </div>
+
+    <ul>
+      <li
+        *ngFor="let video of filteredVideos"
+        class="relative"
+        (click)="selectVideo($event, video)"
+      >
+        <app-watch-now-card
+          [video]="video"
+          [selectedVideoId]="selectedVideoId"
+          [selectionDescription]="'Selected video'"
+        ></app-watch-now-card>
+      </li>
+    </ul>
+  </div>
+</div>

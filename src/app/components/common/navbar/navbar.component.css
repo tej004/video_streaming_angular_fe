@@ -1,0 +1,4 @@
+.invert-logo {
+  filter: invert(1) brightness(2);
+  mix-blend-mode: screen;
+}

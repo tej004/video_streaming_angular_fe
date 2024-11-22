@@ -1,0 +1,29 @@
+<div class="min-h-50">
+  <div>Video</div>
+  <div class="relative cursor-pointer h-full w-full">
+    <video
+      class="w-full max-h-38 object-cover rounded-md"
+      controls
+      style="z-index: 10"
+      [src]="videoUrl"
+    ></video>
+    <input
+      type="file"
+      class="hidden"
+      #fileInput
+      accept="video/*"
+      (change)="handleVideoUrlChange($event)"
+    />
+    <div
+      class="mt-2 p-2 border-1 border border-gray-400 rounded-md cursor-pointer flex justify-center gap-2"
+      (click)="fileInput.click()"
+    >
+      <div>Upload video</div>
+      <img
+        src="https://res.cloudinary.com/damvltogi/image/upload/v1732788415/blwikdlh79wx3zehu0jw.png"
+        alt="Upload Logo"
+        class="w-5"
+      />
+    </div>
+  </div>
+</div>

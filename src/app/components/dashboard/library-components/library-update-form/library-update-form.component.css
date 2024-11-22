@@ -1,0 +1,17 @@
+.custom-grid {
+  @apply w-full h-auto grid grid-cols-2 grid-rows-2 gap-2;
+}
+
+.custom-item {
+  @apply col-span-2;
+}
+
+.custom-full-span {
+  @apply col-span-2 row-span-1;
+}
+
+.custom-backdrop-blur {
+
+  backdrop-filter: blur(5px);
+
+}

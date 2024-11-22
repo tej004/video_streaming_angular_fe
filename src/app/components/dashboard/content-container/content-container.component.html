@@ -1,0 +1,24 @@
+<div class="px-8 py-6 relative">
+  <div>
+    <app-nav-toggle-buttons
+      [selectedButton]="selectedButton"
+      (buttonSelectedEventCallback)="onButtonSelectedEventCallback($event)"
+    ></app-nav-toggle-buttons>
+    <div class="flex justify-center items-center mt-5">
+      <div class="rounded-xl w-full max-w-8xl bg-white">
+        <div *ngIf="selectedButton === 'genres'">
+          <!-- Render Your Videos Component -->
+          <app-your-videos-container></app-your-videos-container>
+        </div>
+        <div *ngIf="selectedButton === 'watch_now'">
+          <!-- Render Watch Now Component -->
+          <app-watch-now></app-watch-now>
+        </div>
+        <div *ngIf="selectedButton === 'library'">
+          <!-- Render Library Component -->
+          <app-library-container></app-library-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

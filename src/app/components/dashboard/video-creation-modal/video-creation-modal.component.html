@@ -1,0 +1,190 @@
+<div
+  *ngIf="isVisible"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+  (click)="close()"
+>
+  <div
+    (click)="$event.stopPropagation()"
+    class="bg-white rounded-lg w-96 p-6 shadow-lg max-h-full overflow-y-auto"
+  >
+    <!-- Modal Header -->
+    <div class="flex justify-between items-center border-b pb-2 mb-4">
+      <h2 class="text-xl font-semibold text-gray-800">Video Creation</h2>
+      <button
+        (click)="close()"
+        class="text-gray-500 hover:text-gray-700 focus:outline-none"
+      >
+        ✖
+      </button>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="applyForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- Title Field -->
+      <div>
+        <label for="title" class="block text-sm font-medium text-gray-700 mb-1"
+          >Title</label
+        >
+        <input
+          id="title"
+          type="text"
+          formControlName="title"
+          class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+          placeholder="Enter video title"
+        />
+        <div
+          *ngIf="
+            applyForm.get('title')?.touched && applyForm.get('title')?.invalid
+          "
+          class="text-red-500 text-sm mt-1"
+        >
+          <span *ngIf="applyForm.get('title')?.errors?.['required']"
+            >Title is required.</span
+          >
+          <span *ngIf="applyForm.get('title')?.errors?.['maxlength']"
+            >Title cannot exceed 100 characters.</span
+          >
+        </div>
+      </div>
+
+      <!-- Description Field -->
+      <div>
+        <label
+          for="description"
+          class="block text-sm font-medium text-gray-700 mb-1"
+          >Description</label
+        >
+        <textarea
+          id="description"
+          rows="3"
+          formControlName="description"
+          class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+          placeholder="Enter video description"
+        ></textarea>
+        <div
+          *ngIf="
+            applyForm.get('description')?.touched &&
+            applyForm.get('description')?.invalid
+          "
+          class="text-red-500 text-sm mt-1"
+        >
+          <span *ngIf="applyForm.get('description')?.errors?.['required']"
+            >Description is required.</span
+          >
+          <span *ngIf="applyForm.get('description')?.errors?.['maxlength']"
+            >Description cannot exceed 500 characters.</span
+          >
+        </div>
+      </div>
+
+      <!-- Video File Upload -->
+      <div>
+        <label for="video" class="block text-sm font-medium text-gray-700 mb-1"
+          >Video File</label
+        >
+        <input
+          id="video"
+          type="file"
+          accept="video/*"
+          (change)="onVideoFileChange($event)"
+          class="hidden"
+        />
+        <label
+          for="video"
+          class="block w-full px-4 py-2 border border-gray-300 rounded-lg cursor-pointer focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-500 text-center bg-gray-100 hover:bg-gray-200"
+        >
+          <img
+            src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/upload.svg"
+            alt="Upload Video"
+            class="mx-auto w-1/2 h-1/2"
+          />
+          <span>Click to upload video</span>
+        </label>
+        <div
+          *ngIf="
+            applyForm.get('video_file_object')?.touched &&
+            applyForm.get('video_file_object')?.invalid
+          "
+          class="text-red-500 text-sm mt-1"
+        >
+          <span *ngIf="applyForm.get('video_file_object')?.errors?.['required']"
+            >A video file is required.</span
+          >
+        </div>
+      </div>
+
+      <!-- Video Preview -->
+      <div *ngIf="videoPreviewUrl">
+        <label class="block text-sm font-medium text-gray-700 mb-1"
+          >Preview</label
+        >
+        <video
+          [src]="videoPreviewUrl"
+          controls
+          class="w-full rounded-lg border border-gray-300 shadow-sm"
+        ></video>
+      </div>
+
+      <!-- Thumbnail File Upload -->
+      <div>
+        <label
+          for="thumbnail"
+          class="block text-sm font-medium text-gray-700 mb-1"
+          >Thumbnail File</label
+        >
+        <input
+          id="thumbnail"
+          type="file"
+          accept="image/*"
+          (change)="onThumbnailFileChange($event)"
+          class="hidden"
+        />
+        <label
+          for="thumbnail"
+          class="block w-full px-4 py-2 border border-gray-300 rounded-lg cursor-pointer focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-500 text-center bg-gray-100 hover:bg-gray-200"
+        >
+          <img
+            src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/upload.svg"
+            alt="Upload Thumbnail"
+            class="mx-auto w-1/2 h-1/2"
+          />
+          <span>Click to upload thumbnail</span>
+        </label>
+        <div
+          *ngIf="
+            applyForm.get('thumbnail_file_url')?.touched &&
+            applyForm.get('thumbnail_file_url')?.invalid
+          "
+          class="text-red-500 text-sm mt-1"
+        >
+          <span
+            *ngIf="applyForm.get('thumbnail_file_url')?.errors?.['required']"
+            >A thumbnail file is required.</span
+          >
+        </div>
+      </div>
+
+      <!-- Thumbnail Preview -->
+      <div *ngIf="thumbnailPreviewUrl">
+        <label class="block text-sm font-medium text-gray-700 mb-1"
+          >Preview</label
+        >
+        <img
+          [src]="thumbnailPreviewUrl"
+          class="w-full rounded-lg border border-gray-300 shadow-sm"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-right mt-6">
+        <button
+          type="submit"
+          [disabled]="applyForm.invalid"
+          class="bg-blue-500 text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-200"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="flex justify-center items-center">
+  <div class="flex">
+    <button
+      [ngClass]="{
+        'border-b-4 border-violet-600 text-violet-600':
+          selectedButton === 'genres',
+        'text-gray-800': selectedButton !== 'genres'
+      }"
+      (click)="selectButton('genres')"
+      class="p-2 transition-all duration-300 w-32 text-center"
+    >
+      Genres
+    </button>
+    <button
+      [ngClass]="{
+        'border-b-4 border-violet-600 text-violet-600':
+          selectedButton === 'watch_now',
+        'text-gray-800': selectedButton !== 'watch_now'
+      }"
+      (click)="selectButton('watch_now')"
+      class="p-2 transition-all duration-300 w-32 text-center"
+    >
+      Watch Now
+    </button>
+    <button
+      [ngClass]="{
+        'border-b-4 border-violet-600 text-violet-600':
+          selectedButton === 'library',
+        'text-gray-800': selectedButton !== 'library'
+      }"
+      (click)="selectButton('library')"
+      class="p-2 transition-all duration-300 w-32 text-center"
+    >
+      Library
+    </button>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="p-4">
+  <div class="mb-4">
+    <label for="title" class="block text-sm font-medium text-gray-700"
+      >Title</label
+    >
+    <input
+      type="text"
+      id="title"
+      [(ngModel)]="title"
+      (ngModelChange)="onInputChange.emit({ id: 'title', value: $event })"
+      class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+    />
+  </div>
+  <div class="mb-4">
+    <label for="description" class="block text-sm font-medium text-gray-700"
+      >Description</label
+    >
+    <textarea
+      id="description"
+      [(ngModel)]="description"
+      (ngModelChange)="onInputChange.emit({ id: 'description', value: $event })"
+      rows="4"
+      class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+    ></textarea>
+  </div>
+  <div class="mb-4">
+    <label for="genre" class="block text-sm font-medium text-gray-700"
+      >Genre</label
+    >
+    <select
+      id="genre"
+      [(ngModel)]="genre"
+      (ngModelChange)="onInputChange.emit({ id: 'genre', value: $event })"
+      class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+    >
+      <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+    </select>
+  </div>
+</div>
